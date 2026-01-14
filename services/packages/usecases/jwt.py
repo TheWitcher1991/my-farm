@@ -1,16 +1,21 @@
+from typing import Dict
+
 from config.settings import AUTH_TOKEN_TYPE
+from packages.kernel.types import JWTAuthenticated, JWTRefreshSession, JWTSignedSession
 from packages.kernel.utils import jwt_decode, jwt_encode, jwt_is_valid
+from users.types import UserId
+from users.usecases import user
+from users.usecases.user import user_use_case
 
 
-class JWTService:
+class JWTUseCase:
 
-    @staticmethod
-    def sign(user) -> dict:
+    def sign(self, user) -> JWTSignedSession:
         access_token, access_token_expires = jwt_encode(user)
         refresh_token, refresh_token_expires = jwt_encode(user, is_refresh=True)
 
-        data = {
-            "user": user,
+        return {
+            "user": user.id,
             "refresh_token": refresh_token,
             "access_token": access_token,
             "session_expires": refresh_token_expires.timestamp(),
@@ -18,32 +23,30 @@ class JWTService:
             "token_type": AUTH_TOKEN_TYPE,
         }
 
-        return data
-
-    @staticmethod
-    def refresh(user):
+    def refresh(self, user) -> JWTRefreshSession:
         access_token, access_token_expires = jwt_encode(user)
 
-        data = {
+        return {
             "access_token": access_token,
             "access_expires": access_token_expires.timestamp(),
         }
 
-        return data
-
-    @staticmethod
-    def decode(token):
+    def decode(self, token: str) -> dict:
         return jwt_decode(token)
 
-    @staticmethod
-    def verify(token) -> bool:
+    def verify(self, token: str) -> bool:
         return jwt_is_valid(token)
 
-    @staticmethod
-    def authenticate(token: str):
+    def authenticate(self, token: str) -> JWTAuthenticated:
         payload = jwt_decode(token)
 
+        user_id = UserId(payload["user_id"])
+        user = user_use_case.get_by_id(user_id)
+
         return {
-            "user": "",
+            "user": user.id,
             "token": token,
         }
+
+
+jwt_use_case = JWTUseCase()

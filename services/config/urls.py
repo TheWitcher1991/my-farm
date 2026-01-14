@@ -9,7 +9,7 @@ from packages.kernel.utils import t
 
 app_name = "config"
 
-admin.site.index_title = t("HeyHey admin")
+admin.site.index_title = t("Моя ферма")
 
 urlpatterns = [
     path(ADMIN_URL, admin.site.urls),
@@ -22,6 +22,14 @@ urlpatterns = [
     ),
     path("v1/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
     path("", include("django_prometheus.urls")),
+    path("v1/", include("articles.routers", namespace="articles")),
+    path("v1/", include("auth.routers", namespace="auth")),
+    path("v1/", include("calculators.routers", namespace="calculators")),
+    path("v1/", include("categories.routers", namespace="categories")),
+    path("v1/", include("diseases.routers", namespace="diseases")),
+    path("v1/", include("documents.routers", namespace="documents")),
+    path("v1/", include("feeds.routers", namespace="feeds")),
+    path("v1/", include("users.routers", namespace="users")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
