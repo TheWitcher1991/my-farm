@@ -1,10 +1,10 @@
 from feeds.serializers import FeedSerializer
 from feeds.usecases import FeedUseCase
-from packages.framework.controllers import BaseSetController
+from packages.framework.controllers import ModelSetBaseSetController
 from packages.usecases.serializer import SerializerUseCase
 
 
-class FeedSetController(BaseSetController):
+class FeedSetController(ModelSetBaseSetController):
     prefix = "feeds"
 
     use_case = FeedUseCase()
