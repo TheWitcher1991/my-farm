@@ -14,11 +14,16 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
+from config.settings import CACHE_ENABLED
+
 
 def clean_cache_by_tag(tag_cache: str) -> None:
     """
     Очищает кэш по тегу
     """
+    if CACHE_ENABLED is False:
+        return None
+
     keys = cache.keys(f"{tag_cache}*")
     cache.delete_many(keys)
 

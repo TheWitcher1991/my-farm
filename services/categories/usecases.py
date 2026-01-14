@@ -1,6 +1,6 @@
 from categories.models import Category
 from categories.types import CategoryId
-from packages.framework.usecases import UseCaseAdapter
+from packages.framework.usecases import CacheUseCaseAdapter, UseCaseAdapter
 
 
 class CategoryUseCase(UseCaseAdapter[Category, CategoryId]):
@@ -11,4 +11,9 @@ class CategoryUseCase(UseCaseAdapter[Category, CategoryId]):
         return self.objects.all()
 
 
+class CategoryCacheUseCase(CacheUseCaseAdapter):
+    cache_prefix = "categories"
+
+
 category_use_case = CategoryUseCase()
+category_cache_use_case = CategoryCacheUseCase()
