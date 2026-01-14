@@ -1,6 +1,6 @@
 from diseases.models import Disease
 from diseases.types import DiseaseId
-from packages.framework.usecases import UseCaseAdapter, CacheUseCaseAdapter
+from packages.framework.usecases import CacheUseCaseAdapter, UseCaseAdapter
 
 
 class DiseaseUseCase(UseCaseAdapter[Disease, DiseaseId]):

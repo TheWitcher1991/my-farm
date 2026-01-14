@@ -1,6 +1,6 @@
 from feeds.models import Feed
 from feeds.types import FeedId
-from packages.framework.usecases import UseCaseAdapter
+from packages.framework.usecases import CacheUseCaseAdapter, UseCaseAdapter
 
 
 class FeedUseCase(UseCaseAdapter[Feed, FeedId]):
@@ -11,4 +11,9 @@ class FeedUseCase(UseCaseAdapter[Feed, FeedId]):
         return self.objects.all()
 
 
+class FeedCacheUseCase(CacheUseCaseAdapter):
+    cache_prefix = "feeds"
+
+
 feed_use_case = FeedUseCase()
+feed_cache_use_case = FeedCacheUseCase()

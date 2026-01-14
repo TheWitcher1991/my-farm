@@ -1,6 +1,6 @@
 from documents.models import Document
 from documents.types import DocumentId
-from packages.framework.usecases import UseCaseAdapter, CacheUseCaseAdapter
+from packages.framework.usecases import CacheUseCaseAdapter, UseCaseAdapter
 
 
 class DocumentUseCase(UseCaseAdapter[Document, DocumentId]):
