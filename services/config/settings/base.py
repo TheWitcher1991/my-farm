@@ -86,3 +86,7 @@ ALLOW_METHODS = ["GET", "HEAD", "OPTIONS"]
 WRITE_METHODS = ["POST", "PUT", "PATCH"]
 
 ALLOW_ACTIONS = ["list", "retrieve"]
+
+IMAGE_ALLOWED_EXTENSIONS = (".png", ".jpg", ".jpeg", ".gif")
+
+DOCUMENTS_ALLOWED_EXTENSIONS = (".pdf", ".doc", ".docx", ".xls", ".xlsx")

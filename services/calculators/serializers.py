@@ -1,9 +1,16 @@
-from calculators.models import Calculator
+from calculators.models import RationCalculation, WeightCalculation
 from packages.kernel.adapters import ModelSerializerAdapter
 
 
-class CalculatorSerializer(ModelSerializerAdapter):
+class WeightCalculationSerializer(ModelSerializerAdapter):
 
     class Meta:
-        model = Calculator
+        model = WeightCalculation
+        fields = "__all__"
+
+
+class RationCalculationSerializer(ModelSerializerAdapter):
+
+    class Meta:
+        model = RationCalculation
         fields = "__all__"

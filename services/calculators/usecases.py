@@ -1,14 +1,23 @@
-from calculators.models import Calculator
-from calculators.types import CalculatorId
+from calculators.models import RationCalculation, WeightCalculation
+from calculators.types import RationCalculationId, WeightCalculationId
 from packages.framework.usecases import UseCaseAdapter
 
 
-class CalculatorUseCase(UseCaseAdapter[Calculator, CalculatorId]):
+class WeightCalculationUseCase(UseCaseAdapter[WeightCalculation, WeightCalculationId]):
     def __init__(self):
-        super().__init__(Calculator)
+        super().__init__(WeightCalculation)
 
     def optimize(self):
         return self.objects.all()
 
 
-calculators_use_case = CalculatorUseCase()
+class RationCalculationUseCase(UseCaseAdapter[RationCalculation, RationCalculationId]):
+    def __init__(self):
+        super().__init__(RationCalculation)
+
+    def optimize(self):
+        return self.objects.all()
+
+
+weight_calculation_use_case = WeightCalculationUseCase()
+ration_calculation_use_case = RationCalculationUseCase()
