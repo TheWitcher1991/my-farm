@@ -84,32 +84,32 @@ importers:
 
   apps/web:
     dependencies:
-      '@fgis/hooks':
+      '@farm/hooks':
         specifier: workspace:*
         version: link:../../packages/hooks
-      '@fgis/href':
+      '@farm/href':
         specifier: workspace:*
         version: link:../../packages/href
-      '@fgis/models':
+      '@farm/models':
         specifier: workspace:*
         version: link:../../packages/models
-      '@fgis/system':
+      '@farm/system':
         specifier: workspace:*
         version: link:../../packages/system
-      '@fgis/toolkit':
+      '@farm/toolkit':
         specifier: workspace:*
         version: link:../../packages/toolkit
       next:
         specifier: ^15.4.6
         version: 15.5.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.97.1)
     devDependencies:
-      '@fgis/eslint-config':
+      '@farm/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@fgis/types':
+      '@farm/types':
         specifier: workspace:*
         version: link:../../packages/types
-      '@fgis/typescript-config':
+      '@farm/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       sass:
@@ -157,93 +157,93 @@ importers:
 
   packages/hooks:
     devDependencies:
-      '@fgis/eslint-config':
+      '@farm/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@fgis/toolkit':
+      '@farm/toolkit':
         specifier: workspace:*
         version: link:../toolkit
-      '@fgis/types':
+      '@farm/types':
         specifier: workspace:*
         version: link:../types
-      '@fgis/typescript-config':
+      '@farm/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
 
   packages/href:
     devDependencies:
-      '@fgis/eslint-config':
+      '@farm/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@fgis/system':
+      '@farm/system':
         specifier: workspace:*
         version: link:../system
-      '@fgis/types':
+      '@farm/types':
         specifier: workspace:*
         version: link:../types
-      '@fgis/typescript-config':
+      '@farm/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
 
   packages/models:
     dependencies:
-      '@fgis/href':
+      '@farm/href':
         specifier: workspace:*
         version: link:../href
-      '@fgis/system':
+      '@farm/system':
         specifier: workspace:*
         version: link:../system
-      '@fgis/toolkit':
+      '@farm/toolkit':
         specifier: workspace:*
         version: link:../toolkit
     devDependencies:
-      '@fgis/eslint-config':
+      '@farm/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@fgis/types':
+      '@farm/types':
         specifier: workspace:*
         version: link:../types
-      '@fgis/typescript-config':
+      '@farm/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
 
   packages/system:
     devDependencies:
-      '@fgis/eslint-config':
+      '@farm/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@fgis/types':
+      '@farm/types':
         specifier: workspace:*
         version: link:../types
-      '@fgis/typescript-config':
+      '@farm/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
 
   packages/toolkit:
     dependencies:
-      '@fgis/href':
+      '@farm/href':
         specifier: workspace:*
         version: link:../href
-      '@fgis/system':
+      '@farm/system':
         specifier: workspace:*
         version: link:../system
     devDependencies:
-      '@fgis/eslint-config':
+      '@farm/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@fgis/types':
+      '@farm/types':
         specifier: workspace:*
         version: link:../types
-      '@fgis/typescript-config':
+      '@farm/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
 
   packages/types:
     devDependencies:
-      '@fgis/eslint-config':
+      '@farm/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@fgis/typescript-config':
+      '@farm/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
 

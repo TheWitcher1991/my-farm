@@ -11,7 +11,7 @@ UserId = NewType("UserId", int)
 class UserRole(models.TextChoices):
     SUPERADMIN = "superadmin", t("Супер-администратор")
     ADMIN = "admin", t("Администратор")
-    USER = "operator", t("Оператор")
+    USER = "user", t("Оператор")
 
 
 @dataclass(frozen=True)

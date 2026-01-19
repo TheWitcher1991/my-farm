@@ -32,4 +32,18 @@ export const href = {
 	get dashboard() {
 		return `${this.root}dashboard`
 	},
+
+	categories: hrefFactory('categories'),
+
+	articles: hrefFactory('articles'),
+
+	documents: hrefFactory('documents'),
+
+	feeds: hrefFactory('feeds'),
+
+	rations: hrefFactory('rations'),
+
+	users: hrefFactory('users'),
+
+	weights: hrefFactory('weights'),
 }

@@ -1,4 +1,4 @@
-import type { AxiosResponse } from 'axios'
+import type { AxiosError, AxiosResponse } from 'axios'
 import React from 'react'
 
 declare const __brand: unique symbol
@@ -14,6 +14,8 @@ export type EmptyDictionary = Record<string, never>
 export type Dictionary<T = unknown> = Record<string, T>
 
 export type RequestResponse<T = unknown> = Promise<AxiosResponse<T>>
+
+export type RequestError = AxiosError
 
 export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 
@@ -39,78 +41,34 @@ export type OnUploadProgress = (
 	total: number,
 ) => void
 
-export const ErrorType = {
-	Validation: 'Validation',
-	NotFound: 'NotFound',
-	Null: 'Null',
-	Forbidden: 'Forbidden',
-	Internal: 'Internal',
-	Unauthorized: 'Unauthorized',
-	Failure: 'Failure',
-	Conflict: 'Conflict',
-	NotAllowed: 'NotAllowed',
-} as const
-
-export type ErrorType = EnumType<typeof ErrorType>
-
-export interface ErrorObject {
-	code: string
-	message: string
-	type: string
+export type ModelConfig<T extends string> = {
+	model: T
+	models: `${T}s`
+	infinityModels: `infinity-${T}s`
 }
 
-export type ErrorList = ErrorObject[]
-
-export interface ResultResponse<T> {
-	result: T
-	errors: ErrorList
-	isSuccess: boolean
-	timestamp: string
+export interface Paginated<RESULTS = [], META = Record<string, any>> {
+	count: number
+	pages: number
+	next: Nullable<string>
+	previous: Nullable<string>
+	meta: META
+	results: RESULTS[]
 }
 
-export interface Paginated<T> {
-	data: T[]
-	meta: {
-		itemsPerPage: number
-		totalItems?: number
-		currentPage?: number
-		totalPages?: number
-		sortBy: [string, OrderDirection][]
-		searchBy: string[]
-		search: string
-		select: string[]
-		filter?: {
-			[column: string]: string | string[]
-		}
-		cursor?: string
-	}
-	links: {
-		first?: string
-		previous?: string
-		current: string
-		next?: string
-		last?: string
-	}
+export interface PaginationPageSize {
+	page: number
+	page_size: number
 }
 
 export interface PaginateQuery<
-	F extends string = string,
-	S extends string = string,
-> {
-	page?: number
-	limit?: number
-	sortBy?: [S, OrderDirection][]
-	searchBy?: string[]
-	search?: string
-	filter?: {
-		[column: F]: string | string[]
-	}
-	select?: string[]
-	cursor?: string
-	path?: string
+	ORDERING extends string = string,
+> extends PaginationPageSize {
+	query: string
+	ordering: ORDERING
 }
 
-export interface PagesListResponse<T> {
+export interface PagesPaginated<T> {
 	pages: Paginated<T>[]
 	pageParams: number[]
 }

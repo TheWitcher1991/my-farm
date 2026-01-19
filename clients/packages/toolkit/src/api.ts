@@ -83,7 +83,7 @@ export function createApi<
 	http: HttpClientInstance,
 	config: { list: string; detail: string; infinity: string },
 ) {
-	const repo = new CrudRepository<LIST_GET, GET, CREATE, UPDATE, OPTIONS>(
+	const repo = new CrudRepository<LIST_GET, GET, CREATE, UPDATE, OPTIONS, ID>(
 		http,
 		config.list,
 	)
@@ -134,9 +134,28 @@ export function createApi<
 			},
 		})
 
+	const useAddEntity = () =>
+		useMutation({
+			mutationFn: (data: CREATE) => repo.add(data),
+			onSuccess: async () => {
+				await optimisticInvalidateQueries([[config.list]])
+			},
+		})
+
 	const useUpdateEntity = (id: ID) =>
 		useMutation({
 			mutationFn: (data: Partial<UPDATE>) => repo.update(id, data),
+			onSuccess: async () => {
+				await optimisticInvalidateQueries([
+					[config.list],
+					[config.detail, id],
+				])
+			},
+		})
+
+	const useEditEntity = (id: ID) =>
+		useMutation({
+			mutationFn: (data: Partial<UPDATE>) => repo.edit(id, data),
 			onSuccess: async () => {
 				await optimisticInvalidateQueries([
 					[config.list],
@@ -158,7 +177,9 @@ export function createApi<
 		useEntity,
 		useInfinityEntities,
 		useCreateEntity,
+		useAddEntity,
 		useUpdateEntity,
+		useEditEntity,
 		useDeleteEntity,
 		repo,
 	}

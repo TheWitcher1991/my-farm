@@ -14,9 +14,7 @@ export const DATE_MASK = 'dd.mm.yyyy'
 
 export const IMAGE_FILE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
-export const AUDIO_FILE_TYPES = ['audio/mpeg']
-
-export const VIDEO_FILE_TYPES = ['video/mp4', 'video/quicktime', '.mov', '.avi']
+export const DOCUMENT_FILE_TYPES = ['']
 
 export const JWT_HEADER = 'jwt'
 
