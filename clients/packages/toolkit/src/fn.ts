@@ -1,13 +1,12 @@
-import type { Branded, PagesListResponse, Paginated } from '@farm/types'
+import type { Branded, PagesPaginated, Paginated, ModelConfig } from '@farm/types'
 import type { InfiniteData } from '@tanstack/react-query'
 import type { AxiosResponse } from 'axios'
 
-export const modelConfig = (alias: string) => ({
+export const modelConfig = <T extends string>(alias: T): ModelConfig<T> => ({
 	model: alias,
-	models: `${this.model}s`,
-	infiniteModels: `infinite-${this.models}`,
+	models: `${alias}s` as `${T}s`,
+	infiniteModels: `infinite-${alias}s` as `infinite-${T}s`,
 })
-
 export const openLink = (link: string, target?: string) => {
 	window.open(link, target)
 }
@@ -56,10 +55,10 @@ type SelectPagesQuery<T> = InfiniteData<
 	number
 >
 
-export const selectPagesQuery = <T, M>({
+export const selectPagesQuery = <T>({
 	pages,
 	pageParams,
-}: SelectPagesQuery<T>): PagesListResponse<T> => ({
+}: SelectPagesQuery<T>): PagesPaginated<T> => ({
 	pages: pages.map(page => page.data as Paginated<T>),
 	pageParams,
 })

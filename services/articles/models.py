@@ -17,7 +17,7 @@ class Article(ModelAdapter):
     status = models.CharField(t("Статус"), choices=DocumentStatus.choices, default=DocumentStatus.DRAFT, max_length=32)
     cover = S3PrivateFileField(
         t("Обложка"),
-        upload_to="covers",
+        upload_to="articles",
         validators=[
             FileExtensionValidator(
                 IMAGE_ALLOWED_EXTENSIONS,
@@ -26,7 +26,6 @@ class Article(ModelAdapter):
         blank=True,
         null=True,
     )
-
     author = models.ForeignKey(
         to="users.User", on_delete=models.CASCADE, verbose_name=t("Автор"), related_name="articles"
     )

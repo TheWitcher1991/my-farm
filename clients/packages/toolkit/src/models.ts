@@ -1,11 +1,6 @@
 import { z, ZodTypeAny } from 'zod'
 
-import {
-	AUDIO_FILE_TYPES,
-	IMAGE_FILE_TYPES,
-	MEDIA_FILE_TYPES,
-	VIDEO_FILE_TYPES,
-} from '@farm/system'
+import { DOCUMENT_FILE_TYPES, IMAGE_FILE_TYPES } from '@farm/system'
 import { Branded } from '@farm/types'
 
 import { formatFileSize } from './format'
@@ -27,19 +22,17 @@ export const buildFileShape = (
 		})
 }
 
-export function zBrand<T extends ZodTypeAny, B extends string>(
+export function brand<T extends ZodTypeAny, B extends string>(
 	schema: T,
 	_brand: B,
 ): z.ZodEffects<T, Branded<z.infer<T>, B>> {
 	return schema.transform(val => val as Branded<z.infer<T>, B>)
 }
 
-export const zShape = {
+export const shapes = {
 	id: z.number().positive().min(1),
 	image: buildFileShape(IMAGE_FILE_TYPES, 5),
-	audio: buildFileShape(AUDIO_FILE_TYPES, 2024),
-	video: buildFileShape(VIDEO_FILE_TYPES, 5024),
-	media: buildFileShape(MEDIA_FILE_TYPES, 5024),
+	document: buildFileShape(DOCUMENT_FILE_TYPES, 2024),
 	ids: z.number().positive().array(),
 	uuid: z.string().uuid(),
 	date: z.string().date(),
@@ -163,3 +156,8 @@ export const zShape = {
 	optional: (schema: ZodTypeAny) =>
 		z.union([schema, z.literal(''), z.literal(null), z.undefined()]),
 }
+
+export const BaseModel = z.object({
+	created_at: shapes.datetime,
+	update_at: shapes.datetime,
+})
